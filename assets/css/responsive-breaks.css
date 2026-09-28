@@ -1,0 +1,41 @@
+/* ================================
+   レスポンシブ改行制御CSS
+   ================================ */
+
+/* PC専用改行 - スマホでは非表示 */
+.pc {
+    display: inline;
+}
+
+@media (max-width: 767px) {
+    .pc {
+        display: none;
+    }
+}
+
+/* スマホ専用改行 - PCでは非表示 */
+.sp {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .sp {
+        display: inline;
+    }
+}
+
+/* 改行を含むテキストの調整 */
+.hero-description,
+.section-description,
+.company-description,
+.news-description,
+.blog-description {
+    line-height: 1.7;
+}
+
+/* 連続する改行の調整 */
+.hero-description br + br,
+.section-description br + br,
+.company-description br + br {
+    line-height: 0.5;
+}

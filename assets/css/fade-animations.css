@@ -1,0 +1,241 @@
+/**
+ * RIFF テーマ フェードアニメーション CSS
+ * バージョン: 1.0.0
+ * 既存スタイルと競合しないよう独自のクラス名を使用
+ */
+
+/* ベースとなるフェード効果の設定 */
+.fadeUpTrigger,
+.fadeDownTrigger,
+.fadeLeftTrigger,
+.fadeRightTrigger {
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
+}
+
+/* 上からフェードイン効果 */
+.fadeUpTrigger {
+  transform: translateY(-60px);
+}
+
+.fadeUpTrigger.riff-fade-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 下からフェードイン効果 */
+.fadeDownTrigger {
+  transform: translateY(60px);
+}
+
+.fadeDownTrigger.riff-fade-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 左からフェードイン効果 */
+.fadeLeftTrigger {
+  transform: translateX(-60px);
+}
+
+.fadeLeftTrigger.riff-fade-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 右からフェードイン効果 */
+.fadeRightTrigger {
+  transform: translateX(60px);
+}
+
+.fadeRightTrigger.riff-fade-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 遅延アニメーション用クラス（オプション） */
+.riff-fade-delay-100 {
+  transition-delay: 0.1s;
+}
+
+.riff-fade-delay-200 {
+  transition-delay: 0.2s;
+}
+
+.riff-fade-delay-300 {
+  transition-delay: 0.3s;
+}
+
+.riff-fade-delay-400 {
+  transition-delay: 0.4s;
+}
+
+.riff-fade-delay-500 {
+  transition-delay: 0.5s;
+}
+
+/* タブレット用調整 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .fadeUpTrigger,
+  .fadeDownTrigger {
+    transform: translateY(-40px);
+  }
+
+  .fadeDownTrigger {
+    transform: translateY(40px);
+  }
+
+  .fadeLeftTrigger,
+  .fadeRightTrigger {
+    transform: translateX(-40px);
+  }
+
+  .fadeRightTrigger {
+    transform: translateX(40px);
+  }
+
+  .fadeUpTrigger,
+  .fadeDownTrigger,
+  .fadeLeftTrigger,
+  .fadeRightTrigger {
+    transition-duration: 0.6s;
+  }
+}
+
+/* モバイル用調整（控えめなアニメーション） */
+@media (max-width: 768px) {
+  .fadeUpTrigger,
+  .fadeDownTrigger {
+    transform: translateY(-20px);
+  }
+
+  .fadeDownTrigger {
+    transform: translateY(20px);
+  }
+
+  .fadeLeftTrigger,
+  .fadeRightTrigger {
+    transform: translateX(-20px);
+  }
+
+  .fadeRightTrigger {
+    transform: translateX(20px);
+  }
+
+  .fadeUpTrigger,
+  .fadeDownTrigger,
+  .fadeLeftTrigger,
+  .fadeRightTrigger {
+    transition-duration: 0.4s;
+  }
+
+  /* 遅延を短縮（モバイルでは素早く表示） */
+  .riff-fade-delay-100 {
+    transition-delay: 0.05s;
+  }
+
+  .riff-fade-delay-200 {
+    transition-delay: 0.1s;
+  }
+
+  .riff-fade-delay-300 {
+    transition-delay: 0.15s;
+  }
+
+  .riff-fade-delay-400 {
+    transition-delay: 0.2s;
+  }
+
+  .riff-fade-delay-500 {
+    transition-delay: 0.25s;
+  }
+}
+
+/* 極小スマートフォン用 */
+@media (max-width: 480px) {
+  .fadeUpTrigger,
+  .fadeDownTrigger {
+    transform: translateY(-15px);
+  }
+
+  .fadeDownTrigger {
+    transform: translateY(15px);
+  }
+
+  .fadeLeftTrigger,
+  .fadeRightTrigger {
+    transform: translateX(-15px);
+  }
+
+  .fadeRightTrigger {
+    transform: translateX(15px);
+  }
+
+  .fadeUpTrigger,
+  .fadeDownTrigger,
+  .fadeLeftTrigger,
+  .fadeRightTrigger {
+    transition-duration: 0.3s;
+  }
+}
+
+/* アニメーション設定を無効にするユーザー向け（アクセシビリティ配慮） */
+@media (prefers-reduced-motion: reduce) {
+  .fadeUpTrigger,
+  .fadeDownTrigger,
+  .fadeLeftTrigger,
+  .fadeRightTrigger {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .fadeUpTrigger.riff-fade-visible,
+  .fadeDownTrigger.riff-fade-visible,
+  .fadeLeftTrigger.riff-fade-visible,
+  .fadeRightTrigger.riff-fade-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* デバッグ用（開発時のみ使用） */
+.riff-fade-debug .fadeUpTrigger,
+.riff-fade-debug .fadeDownTrigger,
+.riff-fade-debug .fadeLeftTrigger,
+.riff-fade-debug .fadeRightTrigger {
+  border: 2px dashed #ff6b35;
+  position: relative;
+}
+
+.riff-fade-debug .fadeUpTrigger::before,
+.riff-fade-debug .fadeDownTrigger::before,
+.riff-fade-debug .fadeLeftTrigger::before,
+.riff-fade-debug .fadeRightTrigger::before {
+  content: "FADE ELEMENT";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  background: #ff6b35;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  z-index: 9999;
+}
+
+/* パフォーマンス最適化 */
+.fadeUpTrigger,
+.fadeDownTrigger,
+.fadeLeftTrigger,
+.fadeRightTrigger {
+  will-change: transform, opacity;
+}
+
+.fadeUpTrigger.riff-fade-visible,
+.fadeDownTrigger.riff-fade-visible,
+.fadeLeftTrigger.riff-fade-visible,
+.fadeRightTrigger.riff-fade-visible {
+  will-change: auto;
+}

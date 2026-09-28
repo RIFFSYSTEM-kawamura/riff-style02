@@ -1,0 +1,340 @@
+/* ================================
+   BLOG スライダー専用CSS
+   Blog Slider Specific Styles
+================================ */
+
+/* スライダーコンテナの基本設定 */
+.riff-blog-slider-container {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+/* スライダートラックの設定 */
+.riff-blog-slider-track {
+  display: flex !important;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  align-items: stretch;
+}
+
+/* スライド要素の基本設定 */
+.riff-blog-slide {
+  flex: 0 0 auto;
+  width: 100%; /* デスクトップのデフォルト */
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* レスポンシブ対応 */
+@media (min-width: 1025px) {
+  .riff-blog-slide {
+    width: calc(100% / var(--blog-slider-desktop-slides, 3));
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .riff-blog-slide {
+    width: calc(100% / var(--blog-slider-tablet-slides, 2));
+  }
+}
+
+@media (max-width: 768px) {
+  .riff-blog-slide {
+    width: calc(100% / var(--blog-slider-mobile-slides, 1));
+  }
+}
+
+/* スライダーの初期化状態 */
+.riff-blog-slider-container:not(.slider-initialized) .riff-blog-slider-track {
+  transform: none !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.riff-blog-slider-container:not(.slider-initialized) .riff-blog-slide {
+  width: auto !important;
+  flex: none !important;
+  padding: 0 !important;
+}
+
+/* ================================
+   バー型ナビゲーション（修正版）
+================================ */
+.riff-blog-slider-dots {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
+  padding: 20px 0;
+  width: 100%;
+}
+
+/* バー型ナビゲーション要素 */
+.riff-blog-slider-dot {
+  width: 40px;
+  height: 4px;
+  border: none;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  padding: 0;
+  outline: none;
+  overflow: hidden;
+}
+
+.riff-blog-slider-dot::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color, #007cba),
+    var(--accent-color, #ff6b35)
+  );
+  border-radius: 2px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.riff-blog-slider-dot:hover {
+  background: rgba(0, 0, 0, 0.3);
+  transform: scaleY(1.5);
+}
+
+.riff-blog-slider-dot:hover::after {
+  width: 100%;
+}
+
+.riff-blog-slider-dot.active {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.riff-blog-slider-dot.active::after {
+  width: 100%;
+}
+
+.riff-blog-slider-dot:focus {
+  outline: 2px solid rgba(0, 124, 186, 0.3);
+  outline-offset: 4px;
+}
+
+/* ブログアイテムの高さ統一 */
+.riff-blog-slide .riff-blog-item-enhanced {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.riff-blog-slide .riff-blog-link-enhanced {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.riff-blog-slide .riff-blog-content-enhanced {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* スライダーの強制設定 */
+.riff-blog-slider-container.slider-initialized .riff-blog-slider-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+}
+
+.riff-blog-slider-container.slider-initialized .riff-blog-slide {
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+/* スライダートラックのカーソルと操作性 */
+.riff-blog-slider-track {
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.riff-blog-slider-track:active {
+  cursor: grabbing;
+}
+
+/* スライダーのスムーズトランジション */
+.riff-blog-slider-container.slider-initialized .riff-blog-slider-track {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* スライド要素のフォーカス管理 */
+.riff-blog-slide[aria-hidden="true"] {
+  visibility: hidden;
+}
+
+.riff-blog-slide[aria-hidden="false"] {
+  visibility: visible;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+  .riff-blog-slider-dots {
+    margin-top: 30px;
+    gap: 6px;
+  }
+
+  .riff-blog-slider-dot {
+    width: 30px;
+    height: 3px;
+  }
+
+  .riff-blog-slide {
+    padding: 0 10px;
+  }
+
+  .riff-blog-slider-track {
+    cursor: default;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .riff-blog-slider-dot {
+    width: 35px;
+  }
+
+  .riff-blog-slide {
+    padding: 0 12px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .riff-blog-slide {
+    padding: 0 15px;
+  }
+}
+
+/* パフォーマンス最適化 */
+.riff-blog-slider-track {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.riff-blog-slide {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* ドットナビゲーションの確実な表示 */
+.riff-blog-slider-dots {
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+  pointer-events: auto !important;
+}
+
+/* 印刷対応 */
+@media print {
+  .riff-blog-slider-dots {
+    display: none !important;
+  }
+
+  .riff-blog-slider-track {
+    transform: none !important;
+    display: block !important;
+  }
+
+  .riff-blog-slide {
+    width: 100% !important;
+    flex: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 20px !important;
+  }
+}
+
+/* アニメーション削減対応 */
+@media (prefers-reduced-motion: reduce) {
+  .riff-blog-slider-track,
+  .riff-blog-slider-dot {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .riff-blog-slider-container.slider-initialized .riff-blog-slider-track {
+    transition: none !important;
+  }
+}
+
+/* 高コントラストモード対応 */
+@media (prefers-contrast: high) {
+  .riff-blog-slider-dot {
+    border: 1px solid currentColor;
+    background: white;
+  }
+
+  .riff-blog-slider-dot.active::after {
+    background: black;
+  }
+}
+
+/* ドラッグ中のリンク制御 */
+.riff-blog-slider-container.dragging {
+  cursor: grabbing !important;
+}
+
+.riff-blog-slider-container.dragging .riff-blog-link-enhanced {
+  pointer-events: none;
+  cursor: grabbing !important;
+}
+
+.riff-blog-slider-container.dragging .riff-blog-slider-track {
+  cursor: grabbing !important;
+}
+
+/* ドラッグ可能であることを示すカーソル */
+.riff-blog-slider-track:hover {
+  cursor: grab;
+}
+
+.riff-blog-slider-track:active {
+  cursor: grabbing;
+}
+
+/* 記事アイテムのホバー効果をドラッグ中は無効化 */
+.riff-blog-slider-container.dragging .riff-blog-item-enhanced:hover {
+  transform: none !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+}
+
+.riff-blog-slider-container.dragging
+  .riff-blog-item-enhanced:hover
+  .riff-blog-image-enhanced
+  img {
+  transform: none !important;
+}
+
+.riff-blog-slider-container.dragging .riff-blog-overlay-enhanced {
+  opacity: 0 !important;
+}
+
+/* タッチデバイスでの改善 */
+@media (hover: none) and (pointer: coarse) {
+  .riff-blog-slider-track {
+    cursor: default;
+  }
+
+  .riff-blog-slider-container.dragging {
+    cursor: default !important;
+  }
+}

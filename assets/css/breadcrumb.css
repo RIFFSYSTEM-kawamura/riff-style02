@@ -1,0 +1,281 @@
+/**
+ * パンくずリスト用CSS
+ * 
+ * @package RiffTheme
+ * @version 1.0.0
+ */
+
+/* パンくずリストコンテナ */
+.riff-breadcrumb-container {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 15px 0;
+  font-size: 14px;
+  color: #6c757d;
+  position: relative;
+}
+
+/* パンくずリスト */
+.riff-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* パンくずリストのリンク */
+.riff-breadcrumb a {
+  color: #6c757d;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 2px 0;
+  font-weight: 400;
+}
+
+.riff-breadcrumb a:hover {
+  color: var(--primary-color, #007cba);
+  text-decoration: underline;
+}
+
+.riff-breadcrumb a:focus {
+  outline: 2px solid var(--primary-color, #007cba);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* セパレーター */
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: #adb5bd;
+  font-weight: 400;
+  user-select: none;
+}
+
+/* 現在のページ */
+.breadcrumb-current {
+  color: #495057;
+  font-weight: 500;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ホームリンクアイコン */
+.breadcrumb-home {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+/* 各種ページタイプのスタイル */
+.breadcrumb-archive,
+.breadcrumb-category,
+.breadcrumb-parent,
+.breadcrumb-parent-category,
+.breadcrumb-year,
+.breadcrumb-month {
+  font-weight: 400;
+}
+
+/* アニメーション効果 */
+.riff-breadcrumb-container {
+  animation: breadcrumbFadeIn 0.3s ease-out;
+}
+
+@keyframes breadcrumbFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ホバーエフェクト強化 */
+.riff-breadcrumb a {
+  position: relative;
+  border-radius: 3px;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  transition: all 0.3s ease;
+}
+
+.riff-breadcrumb a:hover {
+  background: rgba(0, 124, 186, 0.1);
+  transform: translateY(-1px);
+}
+
+/* タブレット対応 */
+@media (max-width: 1024px) {
+  .riff-breadcrumb-container {
+    padding: 14px 0;
+    font-size: 13px;
+  }
+
+  .breadcrumb-separator {
+    margin: 0 7px;
+  }
+
+  .breadcrumb-current {
+    max-width: 250px;
+  }
+}
+
+/* タブレット縦向き・モバイル横向き */
+@media (max-width: 768px) {
+  .riff-breadcrumb-container {
+    padding: 12px 0;
+    font-size: 13px;
+  }
+
+  .riff-breadcrumb {
+    flex-wrap: wrap;
+    gap: 2px 0;
+  }
+
+  .breadcrumb-separator {
+    margin: 0 6px;
+  }
+
+  .breadcrumb-current {
+    max-width: 200px;
+  }
+}
+
+/* モバイル縦向き */
+@media (max-width: 480px) {
+  .riff-breadcrumb-container {
+    padding: 10px 0;
+    font-size: 12px;
+  }
+
+  .breadcrumb-separator {
+    margin: 0 4px;
+    font-size: 11px;
+  }
+
+  .breadcrumb-current {
+    max-width: 150px;
+    font-size: 12px;
+  }
+
+  .riff-breadcrumb a {
+    padding: 3px 4px;
+    margin: -3px -4px;
+    font-size: 12px;
+  }
+
+  /* 小さい画面では改行を許可 */
+  .riff-breadcrumb {
+    line-height: 1.6;
+  }
+}
+
+/* 非常に小さい画面 */
+@media (max-width: 360px) {
+  .riff-breadcrumb-container {
+    padding: 8px 0;
+    font-size: 11px;
+  }
+
+  .breadcrumb-current {
+    max-width: 120px;
+    font-size: 11px;
+  }
+
+  .breadcrumb-separator {
+    margin: 0 3px;
+  }
+}
+
+/* ダークモード対応（プリファレンス） */
+@media (prefers-color-scheme: dark) {
+  .riff-breadcrumb-container {
+    background: #2d3748;
+    border-bottom-color: #4a5568;
+    color: #e2e8f0;
+  }
+
+  .riff-breadcrumb a {
+    color: #cbd5e0;
+  }
+
+  .riff-breadcrumb a:hover {
+    color: #63b3ed;
+    background: rgba(99, 179, 237, 0.1);
+  }
+
+  .breadcrumb-separator {
+    color: #718096;
+  }
+
+  .breadcrumb-current {
+    color: #f7fafc;
+  }
+}
+
+/* 高コントラストモード対応 */
+@media (prefers-contrast: high) {
+  .riff-breadcrumb-container {
+    background: #ffffff;
+    border-bottom: 2px solid #000000;
+  }
+
+  .riff-breadcrumb a {
+    color: #0000ff;
+    font-weight: 600;
+  }
+
+  .riff-breadcrumb a:hover {
+    color: #ff0000;
+    text-decoration: underline;
+    background: #ffff00;
+  }
+
+  .breadcrumb-current {
+    color: #000000;
+    font-weight: 700;
+  }
+}
+
+/* モーション設定を減らすユーザー対応 */
+@media (prefers-reduced-motion: reduce) {
+  .riff-breadcrumb-container {
+    animation: none;
+  }
+
+  .riff-breadcrumb a {
+    transition: none;
+  }
+
+  .riff-breadcrumb a:hover {
+    transform: none;
+  }
+}
+
+/* 印刷時の調整 */
+@media print {
+  .riff-breadcrumb-container {
+    background: transparent;
+    border-bottom: 1px solid #000;
+    padding: 10px 0;
+    font-size: 10pt;
+    color: #000;
+  }
+
+  .riff-breadcrumb a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .breadcrumb-home::before {
+    content: "Home";
+    font-size: 10pt;
+    margin-right: 3px;
+  }
+}
