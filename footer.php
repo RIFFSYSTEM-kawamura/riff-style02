@@ -174,6 +174,20 @@
         </a>
         <?php endif; ?>
     </div>
+
+    <!-- 公式LINEボタンのクリックをGA4イベント(line_click)として計測する -->
+    <script>
+    (function () {
+        document.addEventListener('click', function (e) {
+            var el = e.target.closest('.riff-side-fixed-btn-line');
+            if (!el || typeof gtag === 'undefined') return;
+            gtag('event', 'line_click', {
+                cta_location: 'side_fixed',
+                link_url: el.href
+            });
+        });
+    })();
+    </script>
 </footer>
 
 <?php
