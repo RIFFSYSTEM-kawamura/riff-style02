@@ -12,6 +12,22 @@ function riff_output_article_schema() {
     $site_title = get_option( 'riff_site_title', get_bloginfo( 'name' ) );
     $home_url   = home_url();
 
+    // 記事内容と関係のないキーワードを付けないよう、記事自身のカテゴリー・タグから生成する
+    $keyword_terms = array_merge(
+        (array) get_the_category(),
+        (array) get_the_tags()
+    );
+    $keywords = array();
+    foreach ( $keyword_terms as $term ) {
+        if ( $term instanceof WP_Term && '未分類' !== $term->name ) {
+            $keywords[] = $term->name;
+        }
+    }
+    $keywords = array_values( array_unique( $keywords ) );
+    if ( empty( $keywords ) ) {
+        $keywords = array( 'ホームページ制作', 'LP制作', '業務効率化' );
+    }
+
     $schema = array(
         '@context'          => 'https://schema.org',
         '@type'             => 'Article',
@@ -20,7 +36,7 @@ function riff_output_article_schema() {
         'datePublished'     => get_the_date( 'c' ),
         'dateModified'      => get_the_modified_date( 'c' ),
         'inLanguage'        => 'ja',
-        'keywords'          => 'ホームページ制作,WEB制作,LP制作,コーポレートサイト制作,業務効率化',
+        'keywords'          => implode( ',', $keywords ),
         'author'            => array(
             '@type' => 'Organization',
             'name'  => $site_title,
