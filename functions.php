@@ -173,7 +173,7 @@ add_action( 'init', function() {
 
 // スタイルとスクリプトの読み込み
 function riff_scripts() {
-    wp_enqueue_style('riff-style', get_stylesheet_uri(), array(), '2.0.27');
+    wp_enqueue_style('riff-style', get_stylesheet_uri(), array(), '2.0.28');
     // Google Fontsはheader.phpでpreload+swap方式で読み込み済みのため、ここでの重複読み込みは行わない
 
     wp_enqueue_script('riff-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '2.0.7', true);
