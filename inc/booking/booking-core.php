@@ -26,7 +26,7 @@ const RIFF_BOOKING_POST_TYPE     = 'riff_booking';
 const RIFF_BOOKING_GOOGLE_SCOPE  = 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events';
 
 function riff_booking_inquiry_types() {
-    return array('Web制作について', 'LPについて', 'システム開発について', 'GENBOXについて', 'その他');
+    return array('Web制作について', 'LPについて', 'SEO・MEO・AIOなどの集客について', 'システム開発について', 'GENBOXについて', 'その他');
 }
 
 function riff_booking_budget_options() {
