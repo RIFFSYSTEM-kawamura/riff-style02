@@ -16,6 +16,7 @@ function riff_get_admin_tabs() {
         'riff-section-management'       => array( 'label' => 'セクション設定', 'group' => 'content' ),
         'riff-footer-up-settings'       => array( 'label' => 'CTA設定',        'group' => 'content' ),
         'riff-side-buttons-settings'    => array( 'label' => 'サイド追従ボタン', 'group' => 'content' ),
+        'riff-booking-settings'         => array( 'label' => '日程予約',       'group' => 'content' ),
         'riff-footer-settings'          => array( 'label' => 'フッター設定',   'group' => 'footer' ),
         'riff-seo-settings'             => array( 'label' => 'SEO設定',        'group' => 'seo' ),
         'riff-faq-settings'             => array( 'label' => 'FAQ設定',        'group' => 'content' ),
