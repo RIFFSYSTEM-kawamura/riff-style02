@@ -68,6 +68,7 @@ Text Domain: riff-theme
 .riff-side-fixed-btn-line{background:#06c755;}
 .riff-side-fixed-btn-contact{background:var(--primary-color,#007cba);}
 .riff-side-fixed-btn-booking{background:#e49644;}
+.riff-side-fixed-btn-booking .riff-side-fixed-btn-label{font-size:9px;letter-spacing:0;}
 @keyframes riffSideBtnHeartbeat{
 0%,100%{transform:scale(1);}
 14%{transform:scale(1.1);}
@@ -80,6 +81,7 @@ Text Domain: riff-theme
 .riff-side-fixed-btn{flex:1 1 0;width:auto;max-width:none;height:56px;max-height:56px;border-radius:0;box-shadow:none;animation:none;}
 .riff-side-fixed-btn svg{width:20px;height:20px;min-width:20px;min-height:20px;flex:0 0 20px;}
 .riff-side-fixed-btn-label{font-size:11px;}
+.riff-side-fixed-btn-booking .riff-side-fixed-btn-label{font-size:10px;}
 body{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px));}
 .riff-new-footer-copyright{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px));}
 .back-to-top{bottom:calc(56px + env(safe-area-inset-bottom,0px) + 12px);right:15px;}

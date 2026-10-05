@@ -42,7 +42,7 @@ function riff_booking_rest_error($error, $status = 400) {
 
 /** 管理中（変更・キャンセル可能）の予約をトークンから取得する */
 function riff_booking_rest_manageable($token) {
-    $b = riff_booking_find_by_token($token);
+    $b = riff_booking_sync_from_calendar(riff_booking_find_by_token($token));
     if (!$b) {
         return new WP_Error('riff_booking_not_found', 'ご予約が見つかりませんでした。URLをご確認ください。');
     }

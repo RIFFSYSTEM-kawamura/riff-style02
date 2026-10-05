@@ -130,6 +130,39 @@ function riff_booking_confirm_request($booking, $start) {
     return $booking;
 }
 
+/**
+ * Googleカレンダー側で予定が削除・移動されていたら予約記録に反映する。
+ * カレンダーから直接消した予約にリマインドを送ったり、変更リンクを使えたりしないようにするため。
+ * 通信エラー時は何も変えずに元の予約を返す。
+ */
+function riff_booking_sync_from_calendar($booking) {
+    if (!$booking || $booking['status'] !== 'confirmed' || !$booking['event_id']) {
+        return $booking;
+    }
+    $event = riff_booking_google_request('GET', '/calendars/primary/events/' . rawurlencode($booking['event_id']));
+    $gone = is_wp_error($event)
+        ? in_array($event->get_error_data()['status'] ?? 0, array(404, 410), true)
+        : ($event['status'] ?? '') === 'cancelled';
+    if (is_wp_error($event) && !$gone) {
+        return $booking;
+    }
+
+    if ($gone) {
+        riff_booking_save_meta($booking['id'], array('status' => 'cancelled'));
+        riff_booking_log("予約 {$booking['id']} はGoogleカレンダーで削除されたためキャンセル扱いにしました");
+    } else {
+        $start = isset($event['start']['dateTime']) ? strtotime($event['start']['dateTime']) : 0;
+        $end   = isset($event['end']['dateTime']) ? strtotime($event['end']['dateTime']) : 0;
+        if (!$start || !$end || ($start === $booking['start'] && $end === $booking['end'])) {
+            return $booking;
+        }
+        riff_booking_save_meta($booking['id'], array('start' => $start, 'end' => $end, 'reminded' => 0));
+    }
+    $booking = riff_booking_get($booking['id']);
+    riff_booking_retitle($booking);
+    return $booking;
+}
+
 function riff_booking_retitle($booking) {
     $who = ($booking['company'] ? $booking['company'] . ' ' : '') . $booking['name'];
     if ($booking['status'] === 'request') {
@@ -275,7 +308,11 @@ function riff_booking_send_reminders() {
         ),
     ));
     foreach ($ids as $id) {
-        $b = riff_booking_get($id);
+        $b = riff_booking_sync_from_calendar(riff_booking_get($id));
+        // カレンダーで削除された、または24時間より先へ移動された予約は今回は送らない
+        if ($b['status'] !== 'confirmed' || $b['start'] > $now + DAY_IN_SECONDS || $b['start'] < $now) {
+            continue;
+        }
         // 予約してから24時間以内の面談は確定メールで足りるため、リマインドは送らない
         $booked_at = get_post_time('U', true, $id);
         if ($b['start'] - $booked_at > DAY_IN_SECONDS + HOUR_IN_SECONDS) {

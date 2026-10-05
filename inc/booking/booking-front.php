@@ -38,7 +38,7 @@ function riff_booking_shortcode() {
 
     ob_start();
     if ($token !== '') {
-        $booking = riff_booking_find_by_token($token);
+        $booking = riff_booking_sync_from_calendar(riff_booking_find_by_token($token));
         $config['token'] = $booking ? $token : '';
         riff_booking_render_manage($booking, $contact_url);
     } else {
@@ -270,7 +270,7 @@ add_shortcode('riff_booking_banner', function () {
     }
     wp_enqueue_style('riff-booking', get_template_directory_uri() . '/assets/css/booking.css', array(), filemtime(get_template_directory() . '/assets/css/booking.css'));
     return '<div class="rb-banner"><p class="rb-banner-text"><strong>オンライン面談（無料・約' . (int) RIFF_BOOKING_DURATION_MIN . '分）</strong>をご希望の方は、カレンダーから空いている日時をそのままご予約いただけます。</p>'
-        . '<a class="rb-banner-btn" href="' . esc_url(riff_booking_page_url()) . '">日程を予約する</a></div>';
+        . '<a class="rb-banner-btn" href="' . esc_url(riff_booking_page_url()) . '">オンライン面談を予約する</a></div>';
 });
 
 // 予約ページはお客様ごとの内容（トークン）を扱うため、検索結果に出さずキャッシュもさせない

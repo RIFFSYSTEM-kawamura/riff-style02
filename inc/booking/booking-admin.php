@@ -128,7 +128,7 @@ function riff_booking_settings_page() {
             <?php if (riff_booking_is_ready()): ?>
                 <strong style="color:#00a32a;">● 予約受付中</strong>（<a href="<?php echo esc_url(riff_booking_page_url()); ?>" target="_blank">予約ページを開く</a>）
             <?php else: ?>
-                <strong style="color:#d63638;">● 停止中</strong>（Google連携と予約ページの設定が済むと受付を開始し、右側の「日程を予約する」ボタンが表示されます）
+                <strong style="color:#d63638;">● 停止中</strong>（Google連携と予約ページの設定が済むと受付を開始し、右側の「オンライン面談を予約する」ボタンが表示されます）
             <?php endif; ?>
         </p>
 
@@ -290,7 +290,7 @@ add_action('add_meta_boxes_' . RIFF_BOOKING_POST_TYPE, function () {
 });
 
 function riff_booking_detail_metabox($post) {
-    $b = riff_booking_get($post->ID);
+    $b = riff_booking_sync_from_calendar(riff_booking_get($post->ID));
     $rows = array(
         '状態'               => riff_booking_status_label($b['status']),
         '日時'               => $b['start'] ? riff_booking_format_range($b['start'], $b['end']) : '未確定',
