@@ -1,0 +1,278 @@
+/* 日程予約ページ（inc/booking/booking-front.php）
+   入力欄・ボタンはお問い合わせフォーム（固定ページ「お問い合わせ」のカスタムCSS）と同じ見た目に揃える */
+
+.riff-booking {
+  --rb-accent: #4CAF50;
+  --rb-accent-dark: #3d8b40;
+  --rb-accent-soft: #e8f5e9;
+  --rb-border: #ddd;
+  --rb-muted: #666;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.riff-booking .form-header { text-align: center; margin-bottom: 32px; }
+.riff-booking .form-title { font-size: 32px; font-weight: 600; color: #333; margin: 0 0 20px; letter-spacing: 2px; }
+.riff-booking .form-description { font-size: 14px; color: var(--rb-muted); line-height: 1.8; margin: 0; }
+.riff-booking .rb-alt-link { font-size: 13px; color: var(--rb-muted); margin: 12px 0 0; }
+.riff-booking a { color: var(--primary-color, #2b3688); }
+
+.riff-booking .form-row { margin-bottom: 25px; }
+.riff-booking .form-label { display: block; font-size: 16px; font-weight: 500; color: #333; margin-bottom: 8px; }
+.riff-booking .required-mark { color: #ff0000; font-weight: bold; margin-left: 2px; }
+.riff-booking .form-input,
+.riff-booking .form-select,
+.riff-booking .form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  border: 1px solid var(--rb-border);
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+.riff-booking .form-input:focus,
+.riff-booking .form-select:focus,
+.riff-booking .form-textarea:focus {
+  outline: none;
+  border-color: var(--rb-accent);
+  background-color: #fff;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+.riff-booking .form-textarea { min-height: 140px; resize: vertical; }
+.riff-booking .form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23666' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 40px;
+}
+.riff-booking .rb-help { font-size: 12px; color: var(--rb-muted); margin: 6px 0 0; }
+.riff-booking .rb-form-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+.riff-booking .rb-privacy label { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; cursor: pointer; }
+.riff-booking .rb-privacy input { width: 18px; height: 18px; accent-color: var(--rb-accent); }
+.riff-booking .turnstile-row { display: flex; justify-content: center; margin: 30px 0; }
+.riff-booking .turnstile-row:empty { margin: 0; }
+.riff-booking .submit-row { margin-top: 32px; }
+
+.riff-booking .submit-btn {
+  width: 100%;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+.riff-booking .submit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+.riff-booking .submit-btn:disabled { opacity: .6; cursor: wait; }
+
+.riff-booking .rb-btn-outline {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--rb-accent-dark);
+  background: #fff;
+  border: 2px solid var(--rb-accent);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.riff-booking .rb-btn-outline:hover { background: var(--rb-accent-soft); }
+.riff-booking .rb-btn-danger { color: #c62828; border-color: #e57373; }
+.riff-booking .rb-btn-danger:hover { background: #ffebee; }
+.riff-booking .rb-link-btn {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--primary-color, #2b3688);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* 手順表示 */
+.riff-booking .rb-steps { display: flex; justify-content: center; gap: 8px; list-style: none; padding: 0; margin: 0 0 32px; }
+.riff-booking .rb-steps li { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #999; }
+.riff-booking .rb-steps li + li::before { content: ""; width: 32px; height: 1px; background: #ccc; margin-right: 0; }
+.riff-booking .rb-steps li span {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #eee; color: #999; font-weight: 700; font-size: 13px;
+}
+.riff-booking .rb-steps li.is-active { color: #333; font-weight: 600; }
+.riff-booking .rb-steps li.is-active span { background: var(--rb-accent); color: #fff; }
+.riff-booking .rb-steps li.is-done span { background: var(--rb-accent-soft); color: var(--rb-accent-dark); }
+
+.riff-booking .rb-error {
+  margin: 0 0 24px;
+  padding: 14px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: pre-line;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+.riff-booking .riff-booking-notice { text-align: center; line-height: 1.9; margin: 0; }
+
+/* 日付カレンダー＋時間枠 */
+.riff-booking .rb-picker { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px; }
+.riff-booking .rb-picker.is-loading .rb-calendar,
+.riff-booking .rb-picker.is-loading .rb-times { opacity: .35; pointer-events: none; }
+.riff-booking .rb-loading {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  margin: 0; font-size: 14px; color: var(--rb-muted);
+}
+.riff-booking .rb-loading[hidden] { display: none; }
+.riff-booking .rb-calendar-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.riff-booking .rb-month-label { font-size: 18px; font-weight: 600; }
+.riff-booking .rb-month-nav {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--rb-border); background: #fff; color: #333;
+  font-size: 20px; line-height: 1; cursor: pointer;
+}
+.riff-booking .rb-month-nav:disabled { opacity: .3; cursor: default; }
+.riff-booking .rb-weekdays,
+.riff-booking .rb-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+.riff-booking .rb-weekdays span { font-size: 12px; color: var(--rb-muted); padding: 4px 0; }
+.riff-booking .rb-weekdays .is-sun,
+.riff-booking .rb-day.is-sun { color: #d32f2f; }
+.riff-booking .rb-weekdays .is-sat,
+.riff-booking .rb-day.is-sat { color: #1565c0; }
+.riff-booking .rb-day {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 15px;
+  font-family: inherit;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+}
+.riff-booking .rb-day:disabled { color: #ccc !important; cursor: default; }
+.riff-booking .rb-day.is-open { background: var(--rb-accent-soft); font-weight: 600; }
+.riff-booking .rb-day.is-open:hover { background: #c8e6c9; }
+.riff-booking .rb-day.is-selected { background: var(--rb-accent) !important; color: #fff !important; }
+.riff-booking .rb-legend { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--rb-muted); margin: 12px 0 0; }
+.riff-booking .rb-legend-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--rb-accent-soft); border: 1px solid #c8e6c9; }
+
+.riff-booking .rb-times-title { font-size: 16px; font-weight: 600; margin: 6px 0 16px; }
+.riff-booking .rb-time-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 8px; max-height: 360px; overflow-y: auto; }
+.riff-booking .rb-time {
+  padding: 12px 0;
+  border: 1px solid var(--rb-accent);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--rb-accent-dark);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.riff-booking .rb-time:hover { background: var(--rb-accent-soft); }
+.riff-booking .rb-time.is-selected { background: var(--rb-accent); color: #fff; }
+
+.riff-booking .rb-request-box {
+  margin-top: 32px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  text-align: center;
+}
+.riff-booking .rb-request-box p { font-size: 14px; color: var(--rb-muted); line-height: 1.7; margin: 0 0 14px; }
+
+/* 選択中の日時 */
+.riff-booking .rb-selected {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+  padding: 16px 20px; margin-bottom: 32px;
+  background: var(--rb-accent-soft); border-radius: 6px;
+}
+.riff-booking .rb-selected-label { font-size: 13px; color: var(--rb-accent-dark); font-weight: 600; }
+.riff-booking .rb-selected strong { font-size: 17px; flex: 1 1 auto; }
+
+/* 完了画面 */
+.riff-booking .rb-done { text-align: center; padding: 24px 0; }
+.riff-booking .rb-done-icon {
+  width: 64px; height: 64px; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--rb-accent); color: #fff; font-size: 32px;
+}
+.riff-booking .rb-done-title { font-size: 22px; margin: 0 0 12px; }
+.riff-booking .rb-done-datetime { font-size: 18px; font-weight: 600; margin: 0 0 16px; }
+.riff-booking .rb-done-datetime:empty { display: none; }
+.riff-booking .rb-done-text { font-size: 14px; color: var(--rb-muted); line-height: 1.9; margin: 0; }
+
+/* 変更・キャンセル画面 */
+.riff-booking .rb-summary dl {
+  display: grid; grid-template-columns: max-content 1fr; gap: 12px 24px;
+  margin: 0 0 32px; padding: 24px; background: #f8f9fa; border-radius: 6px;
+}
+.riff-booking .rb-summary dt { font-weight: 600; color: var(--rb-muted); }
+.riff-booking .rb-summary dd { margin: 0; word-break: break-all; }
+.riff-booking .rb-manage-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.riff-booking .rb-manage-actions .submit-btn { max-width: 420px; }
+.riff-booking .rb-panel-title { font-size: 18px; margin: 0 0 20px; }
+.riff-booking .rb-panel > .rb-link-btn { margin-top: 20px; }
+.riff-booking .rb-confirm-row { margin-top: 28px; text-align: center; }
+.riff-booking .rb-confirm-row p { margin: 0 0 14px; }
+
+@media (max-width: 768px) {
+  .riff-booking { padding: 30px 15px; }
+  .riff-booking .form-title { font-size: 24px; letter-spacing: 1px; }
+  .riff-booking .rb-picker { grid-template-columns: 1fr; gap: 24px; }
+  .riff-booking .rb-time-list { max-height: none; }
+  .riff-booking .rb-form-cols { grid-template-columns: 1fr; }
+  .riff-booking .rb-steps li { font-size: 12px; gap: 4px; }
+  .riff-booking .rb-steps li + li::before { width: 12px; }
+  .riff-booking .rb-summary dl { grid-template-columns: 1fr; gap: 4px; padding: 18px; }
+  .riff-booking .rb-summary dd { margin-bottom: 10px; }
+}
+
+/* お問い合わせページ上部の予約案内（[riff_booking_banner]） */
+.rb-banner {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+  padding: 20px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #fdf3e8;
+  border: 1px solid #f3d3ae;
+  border-radius: 8px;
+}
+.rb-banner-text { margin: 0; font-size: 15px; line-height: 1.7; flex: 1 1 320px; }
+.rb-banner-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 4px;
+  background: #e49644;
+  color: #fff !important;
+  font-weight: 700;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.rb-banner-btn:hover { opacity: .9; }

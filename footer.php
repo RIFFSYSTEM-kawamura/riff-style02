@@ -139,7 +139,7 @@
         </button>
     </div>
 
-    <!-- サイド追従ボタン（公式LINE・お問い合わせ） -->
+    <!-- サイド追従ボタン（公式LINE・お問い合わせ・日程予約） -->
     <?php
     $side_line_enabled = get_option('riff_side_buttons_line_enabled', 1);
     $side_line_label = get_option('riff_side_buttons_line_label', '公式LINE');
@@ -173,15 +173,27 @@
             <span class="riff-side-fixed-btn-label"><?php echo esc_html($side_contact_label); ?></span>
         </a>
         <?php endif; ?>
+
+        <?php if (function_exists('riff_booking_is_ready') && riff_booking_is_ready()): ?>
+        <a href="<?php echo esc_url(riff_booking_page_url()); ?>"
+           class="riff-side-fixed-btn riff-side-fixed-btn-booking"
+           aria-label="日程を予約するページへ">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/>
+            </svg>
+            <span class="riff-side-fixed-btn-label">日程を予約する</span>
+        </a>
+        <?php endif; ?>
     </div>
 
-    <!-- 公式LINEボタンのクリックをGA4イベント(line_click)として計測する -->
+    <!-- 公式LINE・日程予約ボタンのクリックをGA4イベント(line_click / booking_click)として計測する -->
     <script>
     (function () {
         document.addEventListener('click', function (e) {
-            var el = e.target.closest('.riff-side-fixed-btn-line');
-            if (!el || typeof gtag === 'undefined') return;
-            gtag('event', 'line_click', {
+            if (typeof gtag === 'undefined') return;
+            var el = e.target.closest('.riff-side-fixed-btn-line, .riff-side-fixed-btn-booking');
+            if (!el) return;
+            gtag('event', el.classList.contains('riff-side-fixed-btn-line') ? 'line_click' : 'booking_click', {
                 cta_location: 'side_fixed',
                 link_url: el.href
             });

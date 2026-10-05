@@ -4879,6 +4879,15 @@ require_once get_template_directory() . '/inc/portfolio-detail.php';
  */
 require_once get_template_directory() . '/inc/faq-schema.php';
 
+/**
+ * 日程予約（Googleカレンダー連携のオンライン面談予約）の読み込み
+ */
+require_once get_template_directory() . '/inc/booking/booking-core.php';
+require_once get_template_directory() . '/inc/booking/booking-actions.php';
+require_once get_template_directory() . '/inc/booking/booking-rest.php';
+require_once get_template_directory() . '/inc/booking/booking-front.php';
+require_once get_template_directory() . '/inc/booking/booking-admin.php';
+
 // ================================
 // BLOGスライダー機能の追加（修正版）
 // ================================

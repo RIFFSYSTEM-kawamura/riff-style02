@@ -67,6 +67,7 @@ Text Domain: riff-theme
 .riff-side-fixed-btn-label{font-size:10px;font-weight:700;line-height:1.2;letter-spacing:.02em;text-align:center;word-break:break-word;max-height:2.4em;overflow:hidden;}
 .riff-side-fixed-btn-line{background:#06c755;}
 .riff-side-fixed-btn-contact{background:var(--primary-color,#007cba);}
+.riff-side-fixed-btn-booking{background:#e49644;}
 @keyframes riffSideBtnHeartbeat{
 0%,100%{transform:scale(1);}
 14%{transform:scale(1.1);}
@@ -76,7 +77,7 @@ Text Domain: riff-theme
 }
 @media (max-width:768px){
 .riff-side-fixed-buttons{top:auto;bottom:0;left:0;right:0;transform:translateZ(0);flex-direction:row;gap:0;z-index:1002;box-shadow:0 -2px 10px rgba(0,0,0,.12);padding-bottom:env(safe-area-inset-bottom,0);}
-.riff-side-fixed-btn{flex:1 1 50%;width:auto;max-width:none;height:56px;max-height:56px;border-radius:0;box-shadow:none;animation:none;}
+.riff-side-fixed-btn{flex:1 1 0;width:auto;max-width:none;height:56px;max-height:56px;border-radius:0;box-shadow:none;animation:none;}
 .riff-side-fixed-btn svg{width:20px;height:20px;min-width:20px;min-height:20px;flex:0 0 20px;}
 .riff-side-fixed-btn-label{font-size:11px;}
 body{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px));}
