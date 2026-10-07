@@ -11,9 +11,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// 受付ルール（年中無休 10:00〜20:00 / 60分枠 / 前後30分空け / 30日先まで）
+// 受付ルール（年中無休 10:00〜22:00 / 60分枠 / 前後30分空け / 30日先まで）
 const RIFF_BOOKING_OPEN_HOUR     = 10;
-const RIFF_BOOKING_CLOSE_HOUR    = 20;
+const RIFF_BOOKING_CLOSE_HOUR    = 22;
 const RIFF_BOOKING_DURATION_MIN  = 60;
 const RIFF_BOOKING_BUFFER_MIN    = 30;
 const RIFF_BOOKING_STEP_MIN      = 30;
