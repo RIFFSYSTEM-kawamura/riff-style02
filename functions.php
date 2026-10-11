@@ -176,7 +176,7 @@ function riff_scripts() {
     wp_enqueue_style('riff-style', get_stylesheet_uri(), array(), '2.0.29');
     // Google Fontsはheader.phpでpreload+swap方式で読み込み済みのため、ここでの重複読み込みは行わない
 
-    wp_enqueue_script('riff-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '2.0.7', true);
+    wp_enqueue_script('riff-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '2.0.8', true);
 
     // Swiper.js: テーマ内に.swiper要素の使用箇所がないため読み込みを停止（未使用CDNリクエストの解消）
 }

@@ -73,10 +73,13 @@ function riff_display_hero_section() {
         <div class="hero-background">
             <?php if ($hero_display_type === 'video' && $hero_bg_video):
                 $hero_bg_poster = get_option('riff_hero_bg_poster', $hero_bg_image);
+                // スマホは画面が小さく通信量も気になるため、軽量版の動画があればそちらを使う（main.js で切り替え）
+                $hero_bg_video_mobile = get_option('riff_hero_bg_video_mobile', '');
             ?>
                 <video class="hero-video" muted loop playsinline preload="none"
-                       width="960" height="540"
+                       width="1280" height="720"
                        <?php if ($hero_bg_poster): ?>poster="<?php echo esc_url($hero_bg_poster); ?>"<?php endif; ?>
+                       <?php if ($hero_bg_video_mobile): ?>data-src-mobile="<?php echo esc_url($hero_bg_video_mobile); ?>"<?php endif; ?>
                        data-src="<?php echo esc_url($hero_bg_video); ?>">
                     <?php if ($hero_bg_image): ?>
                     <img src="<?php echo esc_url($hero_bg_image); ?>" alt="" class="hero-video-fallback" width="1920" height="1080" loading="lazy">

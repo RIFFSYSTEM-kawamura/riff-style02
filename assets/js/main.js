@@ -30,9 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!heroVideo) return;
 
         function startHeroVideo() {
-            const src = heroVideo.getAttribute('data-src');
+            const mobileSrc = heroVideo.getAttribute('data-src-mobile');
+            const useMobile = mobileSrc && window.matchMedia('(max-width: 768px)').matches;
+            const src = useMobile ? mobileSrc : heroVideo.getAttribute('data-src');
             if (!src) return;
             heroVideo.removeAttribute('data-src');
+            heroVideo.removeAttribute('data-src-mobile');
             heroVideo.setAttribute('src', src);
             heroVideo.setAttribute('autoplay', '');
             heroVideo.load();
