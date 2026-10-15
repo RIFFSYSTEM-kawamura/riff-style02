@@ -201,7 +201,7 @@ function riff_booking_settings_page() {
 
         <?php if ($connected): ?>
         <h2>4. 空き判定に使うカレンダー</h2>
-        <p>チェックしたカレンダーに予定がある時間（前後30分を含む）は予約できなくなります。予約の予定は「<?php echo esc_html($s['connected_email']); ?>」のメインカレンダーに作成されます。</p>
+        <p>チェックしたカレンダーに予定がある時間（前後<?php echo (int) RIFF_BOOKING_BUFFER_MIN; ?>分を含む）は予約できなくなります。予約の予定は「<?php echo esc_html($s['connected_email']); ?>」のメインカレンダーに作成されます。</p>
         <?php if (is_wp_error($calendars)): ?>
             <div class="notice notice-error inline"><p>カレンダー一覧を取得できませんでした：<?php echo esc_html($calendars->get_error_message()); ?></p></div>
         <?php else: ?>
