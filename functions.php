@@ -4449,15 +4449,18 @@ function riff_auto_create_news_from_blog_post($new_status, $old_status, $post) {
     }
 
     // AIOSEOのタイトル・ディスクリプションも簡易設定
+    // お知らせ本文は元記事へのリンクだけの短い内容なので、低品質・重複ページと評価されないよう検索対象外(noindex)にする
     global $wpdb;
     $wpdb->insert(
         "{$wpdb->prefix}aioseo_posts",
         array(
-            'post_id'     => $news_id,
-            'title'       => $news_title,
-            'description' => $news_excerpt . '「' . $post->post_title . '」を公開しました。',
-            'created'     => current_time('mysql'),
-            'updated'     => current_time('mysql'),
+            'post_id'        => $news_id,
+            'title'          => $news_title,
+            'description'    => $news_excerpt . '「' . $post->post_title . '」を公開しました。',
+            'robots_default' => 0,
+            'robots_noindex' => 1,
+            'created'        => current_time('mysql'),
+            'updated'        => current_time('mysql'),
         )
     );
 }
