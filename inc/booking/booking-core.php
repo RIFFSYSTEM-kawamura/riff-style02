@@ -451,7 +451,7 @@ function riff_booking_format_range($start, $end) {
 
 function riff_booking_event_payload($booking) {
     $lines = array(
-        'RIFF System 日程予約（オンライン面談）',
+        'RIFF SYSTEM 日程予約（オンライン面談）',
         '',
         '会社名：' . ($booking['company'] ?: '—'),
         '氏名：' . $booking['name'],
@@ -550,5 +550,5 @@ function riff_booking_alert_admin_once($subject, $body) {
         return;
     }
     set_transient($key, 1, DAY_IN_SECONDS);
-    wp_mail(riff_booking_settings()['notify_email'], '[RIFF System] ' . $subject, $body);
+    wp_mail(riff_booking_settings()['notify_email'], '[RIFF SYSTEM] ' . $subject, $body);
 }

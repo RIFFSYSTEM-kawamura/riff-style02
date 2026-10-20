@@ -179,11 +179,11 @@ function riff_booking_retitle($booking) {
 
 function riff_booking_mail_headers() {
     $notify = riff_booking_settings()['notify_email'];
-    $headers = array('Content-Type: text/plain; charset=UTF-8', 'Reply-To: RIFF System <' . $notify . '>');
+    $headers = array('Content-Type: text/plain; charset=UTF-8', 'Reply-To: RIFF SYSTEM <' . $notify . '>');
     // サイトと同じドメインのアドレスなら送信元にする（他ドメインを名乗ると迷惑メール判定されやすい）
     $site_host = wp_parse_url(home_url(), PHP_URL_HOST);
     if (substr(strrchr($notify, '@'), 1) === preg_replace('/^www\./', '', $site_host)) {
-        $headers[] = 'From: RIFF System <' . $notify . '>';
+        $headers[] = 'From: RIFF SYSTEM <' . $notify . '>';
     }
     return $headers;
 }
@@ -213,7 +213,7 @@ function riff_booking_detail_block($b) {
 function riff_booking_google_calendar_link($b) {
     return add_query_arg(array(
         'action'  => 'TEMPLATE',
-        'text'    => rawurlencode('RIFF System オンライン面談'),
+        'text'    => rawurlencode('RIFF SYSTEM オンライン面談'),
         'dates'   => gmdate('Ymd\THis\Z', $b['start']) . '/' . gmdate('Ymd\THis\Z', $b['end']),
         'details' => rawurlencode('Google Meet：' . $b['meet_url']),
     ), 'https://calendar.google.com/calendar/render');
@@ -221,37 +221,37 @@ function riff_booking_google_calendar_link($b) {
 
 function riff_booking_mail_customer($b, $type, $previous = '') {
     $manage = riff_booking_page_url(array('rb' => $b['token']));
-    $sign = "\n\n――――――――――――――――――\nRIFF System\n東京都板橋区前野町2-19-14-206\n" . home_url('/') . "\n※このメールにご返信いただくと担当者に届きます。";
+    $sign = "\n\n――――――――――――――――――\nRIFF SYSTEM\n東京都板橋区前野町2-19-14-206\n" . home_url('/') . "\n※このメールにご返信いただくと担当者に届きます。";
 
     switch ($type) {
         case 'confirmed':
-            $subject = '【RIFF System】オンライン面談のご予約が確定しました';
-            $body = "{$b['name']} 様\n\nこの度はRIFF Systemにご予約いただき、ありがとうございます。\n以下の内容でオンライン面談のご予約が確定しました。\n\n"
+            $subject = '【RIFF SYSTEM】オンライン面談のご予約が確定しました';
+            $body = "{$b['name']} 様\n\nこの度はRIFF SYSTEMにご予約いただき、ありがとうございます。\n以下の内容でオンライン面談のご予約が確定しました。\n\n"
                 . riff_booking_detail_block($b)
                 . "\n\n当日は上記のGoogle Meet URLからご参加ください。\n（パソコンはブラウザのみ、スマートフォンはGoogle Meetアプリでご参加いただけます）\n\n"
                 . "▼ ご自身のGoogleカレンダーに追加する\n" . riff_booking_google_calendar_link($b)
                 . "\n\n▼ 日程の変更・キャンセルはこちら\n{$manage}";
             break;
         case 'request':
-            $subject = '【RIFF System】日程調整のご依頼を受け付けました';
-            $body = "{$b['name']} 様\n\nこの度はRIFF Systemにお問い合わせいただき、ありがとうございます。\n以下の内容で日程調整のご依頼を受け付けました。\n\n"
+            $subject = '【RIFF SYSTEM】日程調整のご依頼を受け付けました';
+            $body = "{$b['name']} 様\n\nこの度はRIFF SYSTEMにお問い合わせいただき、ありがとうございます。\n以下の内容で日程調整のご依頼を受け付けました。\n\n"
                 . riff_booking_detail_block($b)
                 . "\n\nご希望の日時を確認のうえ、担当者より改めてご連絡いたします。\n日時が確定しましたら、Google MeetのURLを記載した確定メールをお送りします。";
             break;
         case 'rescheduled':
-            $subject = '【RIFF System】オンライン面談の日程を変更しました';
+            $subject = '【RIFF SYSTEM】オンライン面談の日程を変更しました';
             $body = "{$b['name']} 様\n\nオンライン面談の日程を変更しました。\n\n変更前：{$previous}\n変更後：" . riff_booking_format_range($b['start'], $b['end'])
                 . "\n\n" . riff_booking_detail_block($b)
                 . "\n\n▼ ご自身のGoogleカレンダーに追加する\n" . riff_booking_google_calendar_link($b)
                 . "\n\n▼ 日程の変更・キャンセルはこちら\n{$manage}";
             break;
         case 'cancelled':
-            $subject = '【RIFF System】オンライン面談のご予約をキャンセルしました';
+            $subject = '【RIFF SYSTEM】オンライン面談のご予約をキャンセルしました';
             $body = "{$b['name']} 様\n\n以下のご予約をキャンセルしました。\n\n■ 日時：" . ($b['start'] ? riff_booking_format_range($b['start'], $b['end']) : '調整中')
                 . "\n\nまたのご予約をお待ちしております。\n" . riff_booking_page_url();
             break;
         case 'reminder':
-            $subject = '【RIFF System】明日のオンライン面談のご案内';
+            $subject = '【RIFF SYSTEM】明日のオンライン面談のご案内';
             $body = "{$b['name']} 様\n\n明日のオンライン面談のご案内です。\n\n"
                 . riff_booking_detail_block($b)
                 . "\n\nお時間になりましたら、上記のGoogle Meet URLからご参加ください。\n\n▼ 日程の変更・キャンセルはこちら\n{$manage}";

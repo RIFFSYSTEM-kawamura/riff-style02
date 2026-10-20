@@ -30,7 +30,7 @@
             <!-- 会社名・住所 -->
             <div class="riff-new-footer-company">
                 <p class="riff-new-footer-company-name">
-                    <?php echo esc_html(get_option('riff_footer_company_name', 'RIFF System')); ?>
+                    <?php echo esc_html(get_option('riff_footer_company_name', 'RIFF SYSTEM')); ?>
                 </p>
                 <p class="riff-new-footer-address">
                     <?php echo esc_html(get_option('riff_footer_address', '')); ?>

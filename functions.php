@@ -2850,7 +2850,7 @@ function riff_footer_settings_admin_page_content() {
     $footer_logo_width = get_option('riff_footer_logo_width', 180);
     $footer_logo_height = get_option('riff_footer_logo_height', 50);
     
-    $company_name = get_option('riff_footer_company_name', 'RIFF System');
+    $company_name = get_option('riff_footer_company_name', 'RIFF SYSTEM');
     $address = get_option('riff_footer_address', '');
     
     // コピーライト設定の取得（新規追加）

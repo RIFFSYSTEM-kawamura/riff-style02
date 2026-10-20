@@ -111,8 +111,12 @@
         '@type'           => array('Organization', 'LocalBusiness'),
         '@id'             => $riff_home . '/#organization',
         'name'            => $riff_site_title,
+        // 「RIFF」を「アール」と読まれたり、法人と誤認されたりしないよう、読み方と個人事業であることを明示する
+        'alternateName'   => array('リフシステム', 'RIFF SYSTEM（リフシステム）'),
         'url'             => $riff_home,
-        'description'     => $riff_site_desc,
+        'description'     => $riff_site_desc . '（屋号：RIFF SYSTEM／読み：リフシステム／代表：川村 亮の個人事業）',
+        'founder'         => array('@type' => 'Person', 'name' => '川村 亮'),
+        'slogan'          => 'すべての困ったを、よかったに変える',
         'sameAs'          => array(
             'https://www.instagram.com/riffsystem?igsh=d3Jta2xrZnk0eTZz',
             'https://lin.ee/TgeZ8qXl',
