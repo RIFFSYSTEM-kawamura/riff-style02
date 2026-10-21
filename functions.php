@@ -4883,6 +4883,11 @@ require_once get_template_directory() . '/inc/portfolio-detail.php';
 require_once get_template_directory() . '/inc/faq-schema.php';
 
 /**
+ * 著者プロフィール画像の読み込み
+ */
+require_once get_template_directory() . '/inc/author-avatar.php';
+
+/**
  * 日程予約（Googleカレンダー連携のオンライン面談予約）の読み込み
  */
 require_once get_template_directory() . '/inc/booking/booking-core.php';

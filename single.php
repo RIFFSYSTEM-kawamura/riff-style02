@@ -155,7 +155,7 @@ riff_display_breadcrumb();
             $author_id = get_the_author_meta('ID');
             $author_name = get_the_author();
             $author_bio = get_the_author_meta('description');
-            $author_avatar = get_avatar($author_id, 80);
+            $author_avatar = get_avatar($author_id, 80, '', $author_name, array('class' => 'author-avatar'));
             
             if ($author_bio) : ?>
                 <div class="post-author-info">
