@@ -186,16 +186,23 @@
         <?php endif; ?>
     </div>
 
-    <!-- 公式LINE・日程予約ボタンのクリックをGA4イベント(line_click / booking_click)として計測する -->
+    <!-- 公式LINE・日程予約へのリンクのクリックをGA4イベント(line_click / booking_click)として計測する。
+         cta_location で押された場所（右側の固定ボタン／記事本文／ヘッダー／その他）を区別する -->
     <script>
     (function () {
         document.addEventListener('click', function (e) {
             if (typeof gtag === 'undefined') return;
-            var el = e.target.closest('.riff-side-fixed-btn-line, .riff-side-fixed-btn-booking');
+            var el = e.target.closest('a[href*="lin.ee/"], a[href*="line.me/"], a[href*="/reservation/"]');
             if (!el) return;
-            gtag('event', el.classList.contains('riff-side-fixed-btn-line') ? 'line_click' : 'booking_click', {
-                cta_location: 'side_fixed',
-                link_url: el.href
+            var place = 'other';
+            if (el.closest('.riff-side-fixed-buttons')) place = 'side_fixed';
+            else if (el.closest('.entry-content, .post-content, article')) place = 'article';
+            else if (el.closest('header')) place = 'header';
+            else if (el.closest('footer')) place = 'footer';
+            gtag('event', /\/reservation\//.test(el.href) ? 'booking_click' : 'line_click', {
+                cta_location: place,
+                link_url: el.href,
+                page_path: window.location.pathname
             });
         });
     })();

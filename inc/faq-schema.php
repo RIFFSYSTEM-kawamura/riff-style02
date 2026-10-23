@@ -1,13 +1,16 @@
 <?php
 /**
  * 記事ごとのFAQ（よくある質問）機能
- * 投稿編集画面でQ&Aを最大5組登録すると、本文末尾にFAQセクションを自動表示し、
+ * 投稿編集画面でQ&Aを最大8組登録すると、本文末尾にFAQセクションを自動表示し、
  * あわせてFAQPageの構造化データ（JSON-LD）をwp_headに出力する。
  */
 
+// 1記事に登録できるQ&Aの数
+const RIFF_FAQ_MAX = 8;
+
 function riff_faq_meta_box_callback($post) {
     wp_nonce_field('riff_faq_save', 'riff_faq_nonce');
-    for ($i = 1; $i <= 5; $i++) {
+    for ($i = 1; $i <= RIFF_FAQ_MAX; $i++) {
         $q = get_post_meta($post->ID, "riff_faq_q{$i}", true);
         $a = get_post_meta($post->ID, "riff_faq_a{$i}", true);
         echo '<div style="margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid #eee;">';
@@ -40,7 +43,7 @@ function riff_faq_save_meta_box($post_id) {
     if (!current_user_can('edit_post', $post_id)) {
         return;
     }
-    for ($i = 1; $i <= 5; $i++) {
+    for ($i = 1; $i <= RIFF_FAQ_MAX; $i++) {
         $q = isset($_POST["riff_faq_q{$i}"]) ? sanitize_text_field(wp_unslash($_POST["riff_faq_q{$i}"])) : '';
         $a = isset($_POST["riff_faq_a{$i}"]) ? sanitize_textarea_field(wp_unslash($_POST["riff_faq_a{$i}"])) : '';
         update_post_meta($post_id, "riff_faq_q{$i}", $q);
@@ -51,7 +54,7 @@ add_action('save_post', 'riff_faq_save_meta_box');
 
 function riff_faq_get_items($post_id) {
     $items = [];
-    for ($i = 1; $i <= 5; $i++) {
+    for ($i = 1; $i <= RIFF_FAQ_MAX; $i++) {
         $q = get_post_meta($post_id, "riff_faq_q{$i}", true);
         $a = get_post_meta($post_id, "riff_faq_a{$i}", true);
         if ($q && $a) {
