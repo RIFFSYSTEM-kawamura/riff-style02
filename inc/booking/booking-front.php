@@ -83,7 +83,8 @@ function riff_booking_render_form($contact_url) {
         <div class="form-header">
             <h2 class="form-title">オンライン面談のご予約</h2>
             <p class="form-description">
-                ご都合のよい日時を選んでご予約ください。面談はGoogle Meetで行います（約<?php echo (int) RIFF_BOOKING_DURATION_MIN; ?>分・無料）。<br>
+                ご都合のよい日時を選んでご予約ください。Google Meetを使った無料のオンライン相談です。<br>
+                「ちょっと聞いてみたい」「まずは状況だけ見てほしい」といったご相談も、お気軽にどうぞ。<br>
                 受付時間：年中無休 <?php echo (int) RIFF_BOOKING_OPEN_HOUR; ?>:00〜<?php echo (int) RIFF_BOOKING_CLOSE_HOUR; ?>:00
             </p>
             <p class="rb-alt-link">日程調整が不要なご相談は<a href="<?php echo esc_url($contact_url); ?>">お問い合わせフォーム</a>からどうぞ。</p>
