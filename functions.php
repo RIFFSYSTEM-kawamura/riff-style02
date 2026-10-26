@@ -4888,6 +4888,11 @@ require_once get_template_directory() . '/inc/faq-schema.php';
 require_once get_template_directory() . '/inc/author-avatar.php';
 
 /**
+ * IndexNow（Bingなどへの更新通知）の読み込み
+ */
+require_once get_template_directory() . '/inc/indexnow.php';
+
+/**
  * 日程予約（Googleカレンダー連携のオンライン面談予約）の読み込み
  */
 require_once get_template_directory() . '/inc/booking/booking-core.php';
