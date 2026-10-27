@@ -1,12 +1,20 @@
 <?php
 /**
  * 記事ごとのFAQ（よくある質問）機能
- * 投稿編集画面でQ&Aを最大8組登録すると、本文末尾にFAQセクションを自動表示し、
+ * 投稿・固定ページの編集画面でQ&Aを最大8組登録すると、本文末尾にFAQセクションを自動表示し、
  * あわせてFAQPageの構造化データ（JSON-LD）をwp_headに出力する。
  */
 
 // 1記事に登録できるQ&Aの数
 const RIFF_FAQ_MAX = 8;
+
+// FAQを使える投稿タイプ
+const RIFF_FAQ_POST_TYPES = array('post', 'page');
+
+// FAQを表示するページか（トップページは独自テンプレートのため対象外）
+function riff_faq_is_target() {
+    return is_singular(RIFF_FAQ_POST_TYPES) && !is_front_page();
+}
 
 function riff_faq_meta_box_callback($post) {
     wp_nonce_field('riff_faq_save', 'riff_faq_nonce');
@@ -26,7 +34,7 @@ function riff_faq_add_meta_box() {
         'riff_faq_box',
         'よくある質問（FAQ）',
         'riff_faq_meta_box_callback',
-        'post',
+        RIFF_FAQ_POST_TYPES,
         'normal',
         'default'
     );
@@ -65,7 +73,7 @@ function riff_faq_get_items($post_id) {
 }
 
 function riff_faq_append_to_content($content) {
-    if (!is_single() || get_post_type() !== 'post' || !in_the_loop() || !is_main_query()) {
+    if (!riff_faq_is_target() || !in_the_loop() || !is_main_query()) {
         return $content;
     }
     $items = riff_faq_get_items(get_the_ID());
@@ -88,10 +96,10 @@ function riff_faq_append_to_content($content) {
 add_filter('the_content', 'riff_faq_append_to_content', 20);
 
 function riff_faq_output_schema() {
-    if (!is_single() || get_post_type() !== 'post') {
+    if (!riff_faq_is_target()) {
         return;
     }
-    $items = riff_faq_get_items(get_the_ID());
+    $items = riff_faq_get_items(get_queried_object_id());
     if (empty($items)) {
         return;
     }

@@ -4893,6 +4893,11 @@ require_once get_template_directory() . '/inc/author-avatar.php';
 require_once get_template_directory() . '/inc/indexnow.php';
 
 /**
+ * llms.txt（AI向けのサイト案内）の新着記事欄の自動更新の読み込み
+ */
+require_once get_template_directory() . '/inc/llms-txt.php';
+
+/**
  * 日程予約（Googleカレンダー連携のオンライン面談予約）の読み込み
  */
 require_once get_template_directory() . '/inc/booking/booking-core.php';
