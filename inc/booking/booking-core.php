@@ -11,8 +11,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// 受付ルール（年中無休 10:00〜22:00 / 60分枠 / 前後60分空け / 30日先まで）
+// 受付ルール（月〜土 10:00〜22:00・日曜定休 / 60分枠 / 前後60分空け / 30日先まで）
 const RIFF_BOOKING_OPEN_HOUR     = 10;
+// 予約を受け付けない曜日（0=日曜〜6=土曜）
+const RIFF_BOOKING_CLOSED_WEEKDAYS = array(0);
 const RIFF_BOOKING_CLOSE_HOUR    = 22;
 const RIFF_BOOKING_DURATION_MIN  = 60;
 const RIFF_BOOKING_BUFFER_MIN    = 60;
@@ -301,7 +303,8 @@ function riff_booking_is_valid_slot_start($ts) {
     }
     $dt = (new DateTimeImmutable('@' . $ts))->setTimezone(wp_timezone());
     $minutes = (int) $dt->format('G') * 60 + (int) $dt->format('i');
-    return (int) $dt->format('s') === 0
+    return !in_array((int) $dt->format('w'), RIFF_BOOKING_CLOSED_WEEKDAYS, true)
+        && (int) $dt->format('s') === 0
         && $minutes % RIFF_BOOKING_STEP_MIN === 0
         && $minutes >= RIFF_BOOKING_OPEN_HOUR * 60
         && $minutes + RIFF_BOOKING_DURATION_MIN <= RIFF_BOOKING_CLOSE_HOUR * 60;

@@ -134,6 +134,13 @@
             'latitude'  => '35.7648345',
             'longitude' => '139.6883257',
         ),
+        // Googleビジネスプロフィール・Bing Placesと同じ営業時間（日曜定休）
+        'openingHoursSpecification' => array(
+            '@type'     => 'OpeningHoursSpecification',
+            'dayOfWeek' => array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
+            'opens'     => '10:00',
+            'closes'    => '22:00',
+        ),
         // 拠点（板橋区前野町）から訪問対応しやすい近隣区を明示し、地域検索での関連性を高める
         'areaServed'      => array(
             array('@type' => 'City', 'name' => '板橋区'),
