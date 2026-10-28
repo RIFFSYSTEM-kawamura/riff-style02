@@ -141,13 +141,15 @@
             'opens'     => '10:00',
             'closes'    => '22:00',
         ),
-        // 拠点（板橋区前野町）から訪問対応しやすい近隣区を明示し、地域検索での関連性を高める
+        // 拠点（板橋区前野町）から訪問対応しやすい近隣区と、対面対応できる県を明示し、地域検索での関連性を高める
         'areaServed'      => array(
             array('@type' => 'City', 'name' => '板橋区'),
             array('@type' => 'City', 'name' => '練馬区'),
             array('@type' => 'City', 'name' => '北区'),
             array('@type' => 'City', 'name' => '豊島区'),
             array('@type' => 'AdministrativeArea', 'name' => '東京都'),
+            array('@type' => 'AdministrativeArea', 'name' => '神奈川県'),
+            array('@type' => 'AdministrativeArea', 'name' => '千葉県'),
             array('@type' => 'Country', 'name' => '日本'),
         ),
         'knowsAbout'      => array(
