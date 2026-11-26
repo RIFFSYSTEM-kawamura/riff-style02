@@ -103,8 +103,10 @@
     $riff_home    = home_url();
     $riff_phone   = get_option('riff_header_phone');
     $riff_email   = get_option('riff_header_email');
-    $riff_logo    = get_option('riff_logo_url');
+    // ヘッダーのロゴ設定が空のときも、構造化データにはロゴを出す
+    $riff_logo    = get_option('riff_logo_url') ?: home_url('/wp-content/uploads/2025/08/HP.png');
     $riff_address = get_option('riff_footer_address');
+    $riff_gbp_url = 'https://share.google/IGheqKfWBencYYiK5';
 
     $riff_org = array(
         '@context'        => 'https://schema.org',
@@ -120,7 +122,12 @@
         'sameAs'          => array(
             'https://www.instagram.com/riffsystem?igsh=d3Jta2xrZnk0eTZz',
             'https://lin.ee/TgeZ8qXl',
+            'https://github.com/RIFFSYSTEM-kawamura',
+            $riff_gbp_url,
         ),
+        // Googleビジネスプロフィールと同じ事業者だと結び付け、AI検索で写真付きの店舗カードとして表示されやすくする
+        'hasMap'          => $riff_gbp_url,
+        'image'           => $riff_logo,
         'address'         => array(
             '@type'           => 'PostalAddress',
             'streetAddress'   => '前野町2-19-14-206',
